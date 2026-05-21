@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MicroPython Web IDE</title>
+    <link rel="stylesheet" href="./styles.css?v=16" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">MP</div>
+          <div>
+            <h1>MicroPython Web IDE</h1>
+            <p>ESP32 / ESP8266 serial workspace</p>
+          </div>
+        </div>
+
+        <div class="connection-strip">
+          <select id="portSelect" aria-label="Serial port">
+            <option value="">Auto detect ESP port</option>
+          </select>
+          <input id="baudInput" type="number" min="9600" step="9600" value="115200" aria-label="Baud rate" />
+          <button id="connectBtn" class="button primary">Connect</button>
+          <button id="disconnectBtn" class="button secondary">Disconnect</button>
+          <select id="themeSelect" class="theme-select" aria-label="Theme">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="purple">Purple</option>
+            <option value="custom">Custom</option>
+          </select>
+          <button id="customThemeBtn" class="button secondary" type="button">Customize</button>
+          <span id="statusBadge" class="status-badge">Offline</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="file-pane" aria-label="Board files">
+          <div class="pane-head">
+            <div>
+              <h2>Board Files</h2>
+              <p id="fileCount">No files loaded</p>
+            </div>
+            <button id="refreshFilesBtn" class="icon-button" title="Refresh files" aria-label="Refresh files">R</button>
+          </div>
+          <div id="fileList" class="file-list"></div>
+          <div class="file-actions">
+            <button id="newFileBtn" class="button secondary full">New file</button>
+            <div class="firmware-box">
+              <label class="firmware-picker">
+                <span id="firmwareFileLabel">Select firmware .bin</span>
+                <input id="firmwareInput" type="file" accept=".bin,application/octet-stream" />
+              </label>
+              <div class="firmware-row">
+                <input id="firmwareAddressInput" value="0x1000" aria-label="Flash address" />
+                <label class="firmware-erase">
+                  <input id="firmwareEraseInput" type="checkbox" />
+                  <span>Erase</span>
+                </label>
+              </div>
+              <button id="flashFirmwareBtn" class="button secondary full" type="button">Flash firmware</button>
+              <button id="eraseFlashBtn" class="button danger full" type="button">Erase flash only</button>
+            </div>
+          </div>
+        </aside>
+
+        <section class="editor-pane" aria-label="Editor">
+          <div class="editor-toolbar">
+            <input id="fileNameInput" class="file-name hidden-input" placeholder="main.py" aria-label="File name" />
+            <div id="openTabs" class="open-tabs" role="tablist" aria-label="Open files"></div>
+            <div class="editor-actions">
+              <button id="runBtn" class="tool-button run-tool" type="button" title="Run file" aria-label="Run file">
+                <span class="play-glyph" aria-hidden="true"></span>
+                <span>Run</span>
+              </button>
+              <button id="stopBtn" class="tool-button" type="button" title="Stop program" aria-label="Stop program">
+                <span class="stop-glyph" aria-hidden="true"></span>
+                <span>Stop</span>
+              </button>
+              <span class="tool-divider" aria-hidden="true"></span>
+              <button id="saveBtn" class="tool-button" type="button">Save</button>
+              <button id="fullscreenEditorBtn" class="tool-button" type="button">Focus</button>
+              <button id="deleteBtn" class="tool-button danger-tool" type="button">Delete</button>
+            </div>
+          </div>
+          <div class="editor-surface">
+            <div class="code-editor">
+              <pre id="highlightedCode" aria-hidden="true"></pre>
+              <textarea id="editor" spellcheck="false" placeholder="# Open a board file or start typing MicroPython code here"></textarea>
+              <pre id="minimapCode" aria-hidden="true"></pre>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <section class="terminal-pane" aria-label="Terminal">
+        <div class="terminal-head">
+          <div>
+            <h2>Terminal</h2>
+            <p>Type commands here; board output appears in the same stream</p>
+          </div>
+          <div class="terminal-actions">
+            <button id="toggleTerminalBtn" class="icon-button terminal-icon" type="button" title="Close terminal (Ctrl+J)" aria-label="Close terminal">×</button>
+            <button id="clearTerminalBtn" class="icon-button terminal-icon" type="button" title="Clear terminal" aria-label="Clear terminal">⌫</button>
+          </div>
+        </div>
+        <pre id="replOutput" class="terminal-output active"></pre>
+        <form id="terminalForm" class="terminal-input">
+          <span>&gt;&gt;&gt;</span>
+          <input id="terminalCommand" autocomplete="off" placeholder="print('hello from ESP')" />
+        </form>
+      </section>
+
+      <aside id="themePanel" class="theme-panel" aria-label="Customize theme" aria-hidden="true">
+        <div class="theme-panel-head">
+          <div>
+            <h2>Theme Customizer</h2>
+            <p>Change editor, syntax, terminal, and UI colors</p>
+          </div>
+          <button id="closeThemePanelBtn" class="icon-button" type="button" aria-label="Close theme customizer">x</button>
+        </div>
+        <div id="themeControls" class="theme-controls"></div>
+        <div class="theme-panel-actions">
+          <button id="saveThemeBtn" class="button primary" type="button">Save custom</button>
+          <button id="resetThemeBtn" class="button secondary" type="button">Reset</button>
+        </div>
+      </aside>
+    </div>
+
+    <script src="./app.js?v=19"></script>
+  </body>
+</html>
