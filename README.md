@@ -7,7 +7,7 @@ board through the local USB serial port. Use it to edit files, save code to the
 board, run MicroPython scripts, use a REPL/serial terminal, and flash firmware
 without switching between multiple tools.
 
-![MicroPyDesk dark theme](docs/web-ide-dark.png)
+![MicroPyDesk demo](docs/micropydesk-demo.gif)
 
 ## Why MicroPyDesk
 
@@ -176,6 +176,7 @@ and flash erase from a text menu.
 |   |-- app.js
 |   `-- styles.css
 |-- docs/
+|   |-- micropydesk-demo.gif
 |   |-- web-ide-dark.png
 |   |-- web-ide-light.png
 |   |-- web-ide-purple.png
